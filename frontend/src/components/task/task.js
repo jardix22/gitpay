@@ -450,8 +450,8 @@ class Task extends Component {
     return (
       <StripeProvider apiKey={process.env.STRIPE_PUBKEY}>
         <div>
+          <TopBarContainer />
           <Grid container className={classes.rootTopBar} spacing={24}>
-            <TopBarContainer />
             <Grid item xs={12}>
               <Typography variant="subheading" color="primary" align="left" className={classes.typoSmall} gutterBottom>
                 <ReactPlaceholder showLoadingAnimation={true} type='text' rows={1} ready={task.completed}>

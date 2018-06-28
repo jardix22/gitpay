@@ -51,8 +51,8 @@ class Welcome extends Component {
 
     return (
       <div className={classes.root}>
+        <TopBarContainer />
         <Grid container spacing={24}>
-          <TopBarContainer />
           <Grid item xs={12}>
             <div className={classes.mainBlock}>
               <Typography type="display2" className={classes.tagline} gutterBottom>
