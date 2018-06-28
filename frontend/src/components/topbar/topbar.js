@@ -275,7 +275,7 @@ class TopBar extends Component  {
                 </div>
               )}
 
-              { isLoggedIn && user.picture_url &&
+              { (isLoggedIn && user.picture_url) &&
                 <StyledAvatar
                   alt={user.username}
                   src={user.picture_url}
@@ -283,7 +283,7 @@ class TopBar extends Component  {
                 />
               }
 
-              { isLoggedIn && !user.picture_url &&
+              { (isLoggedIn && !user.picture_url) &&
                 <StyledAvatar src=""
                   alt={user.username}
                   onClick={this.handleMenu}
