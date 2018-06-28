@@ -21,6 +21,9 @@ import UserIcon from 'material-ui-icons/AccountCircle'
 import MoreIcon from 'material-ui-icons/MoreHoriz'
 import { withStyles } from 'material-ui/styles'
 
+import styled, { css }  from 'styled-components'
+import media from '../../styleguide/media'
+
 import Menu, { MenuItem } from 'material-ui/Menu'
 import Button from 'material-ui/Button'
 import nameInitials from 'name-initials'
@@ -32,42 +35,75 @@ const classes = (theme) => mainStyles(theme)
 
 import LoginButton from '../session/login-button'
 
+
 const logo = require('../../images/gitpay-logo.png')
 const logoGithub = require('../../images/github-logo.png')
 
+const Bar = styled.div`
+  box-sizing: border-box;
+  padding: 10px 20px;
+  background-color: black;
+  margin: 0;
+
+  ${media.phone`
+    padding: 10px 15px;
+  `}
+`
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const Side =  styled.div`
+  display: flex;
+  width: 32%;
+`
+
+const LeftSide = styled(Side)``
+
+const RightSide = styled(Side)`
+  justify-content: flex-end;
+`
+
+const Logo = styled.img`
+  width: 140px;
+
+  ${media.phone`width: 100px;`}
+`
+
+const StyledButton = styled(Button)`
+  min-width: 40px !important;
+  font-size: 12;
+  cursor: pointer;
+
+  ${props => props.padding === 'left' && `
+    margin-left: 10px !important;
+  `}
+`
+
+const LabelButton = styled.span`
+  margin-right: 10px;
+
+  ${media.phone`
+    margin-right: 0;
+    display: none;
+  `}
+`
+
+const StyledAvatar = styled(Avatar)`
+  margin-left: 20px;
+  cursor: pointer;
+
+  ${media.phone`margin-left: 15px;`}
+`
+
+const HiddenMobile = styled.div`
+  ${media.phone`display: none;`}
+`
+
 const styles = {
-  logoMain: {
-    marginLeft: 340
-  },
-  logoAlt: {
-    marginLeft: 240
-  },
-  containerBar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  notifications: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginRight: 30,
-    marginLeft: 0
-  },
-  intro: {
-    paddingTop: 20,
-    paddingBottom: 10,
-    margin: 0,
-    textAlign: 'center',
-    width: '100%',
-    backgroundColor: 'black'
-  },
-  spaceRight: {
-    marginRight: 10
-  },
-  avatar: {
-    marginLeft: 20
-  },
   formControl: {
     width: '100%'
   }
@@ -205,24 +241,25 @@ class TopBar extends Component  {
     );
 
     return (
+      <Bar>
+        <Container>
+          <LeftSide>
+            <StyledButton size="small" href="/"><HomeIcon color="primary"/></StyledButton>
+          </LeftSide>
 
-      <div style={styles.intro}>
-        <div style={styles.containerBar}>
-          <Button href="/">
-            <HomeIcon color="primary"/>
-          </Button>
-            <img style={isLoggedIn ? styles.logoMain : styles.logoAlt } src={logo} width="140"/>
-            <div style={styles.notifications}>
-              <Button style={{marginRight: 10}} onClick={this.handleClickDialogCreateTask} variant="raised" size="medium" color="primary" className={classes.altButton}>
-                <span style={styles.spaceRight}>Criar tarefa</span>  <PlusIcon />
-              </Button>
-              {!isLoggedIn ?
-                (
+          <Logo src={ logo } />
+
+          <RightSide>
+              <StyledButton onClick={ this.handleClickDialogCreateTask } variant="raised" size="small" color="primary">
+                <LabelButton>Criar tarefa</LabelButton><PlusIcon />
+              </StyledButton>
+
+              {!isLoggedIn && (
                 <div>
-                  <Button style={{fontSize: 12}} onClick={this.handleClickDialogSignUser} variant="raised" size="small" color="secondary"
-                          className={classes.altButton}>
-                    <span style={styles.spaceRight}> Entrar</span> <UserIcon />
-                  </Button>
+                  <StyledButton onClick={this.handleClickDialogSignUser} variant="raised" size="small" color="secondary" padding='left' >
+                    <LabelButton>Entrar</LabelButton><UserIcon />
+                  </StyledButton>
+
                   <Dialog
                     open={this.state.signUserDialog}
                     onClose={this.handleSignUserDialogClose}
@@ -236,19 +273,37 @@ class TopBar extends Component  {
                     </DialogContent>
                   </Dialog>
                 </div>
-                ) : (
-                  <Button style={{fontSize: 12}} onClick={this.handleProfile} variant="raised" size="small" color="secondary"
-                          className={classes.altButton}>
-                    <span style={styles.spaceRight}> Conta </span>
-                    <Avatar
-                      alt={user.username}
-                      src={user.picture_url}
-                      style={{width: 28, height: 28}}
-                      onClick={this.handleMenu}
-                    />
-                  </Button>
-                )
+              )}
+
+              { isLoggedIn && user.picture_url &&
+                <StyledAvatar
+                  alt={user.username}
+                  src={user.picture_url}
+                  onClick={this.handleMenu}
+                />
               }
+
+              { isLoggedIn && !user.picture_url &&
+                <StyledAvatar src=""
+                  alt={user.username}
+                  onClick={this.handleMenu}
+                >
+                  { nameInitials(user.username) }
+                </StyledAvatar>
+              }
+
+              { isLoggedIn &&
+                <HiddenMobile>
+                  <Tooltip id="tooltip-github" title="Acessar nosso github" placement="bottom">
+                    <StyledAvatar
+                      alt={user.username}
+                      src={logoGithub}
+                      onClick={this.handleGithubLink}
+                    />
+                  </Tooltip>
+                </HiddenMobile>
+              }
+
               <form onSubmit={this.handleCreateTask} action="POST">
                 <Dialog
                   open={this.state.createTaskDialog}
@@ -288,63 +343,25 @@ class TopBar extends Component  {
                   </DialogActions>
                 </Dialog>
               </form>
-              <ReactPlaceholder showLoadingAnimation={true} customPlaceholder={avatarPlaceholder} ready={completed}>
+
               { isLoggedIn &&
-              <div style={styles.notifications}>
-                {user.picture_url ?
-                  (
-                    <div style={{display: 'flex'}}>
-                      <Tooltip id="tooltip-github" title="Acessar nosso github" placement="bottom">
-                        <Avatar
-                        alt={user.username}
-                        src={logoGithub}
-                        style={styles.avatar}
-                        onClick={this.handleGithubLink}
-                        />
-                      </Tooltip>
-                      <Avatar
-                      alt={user.username}
-                      style={styles.avatar}
-                      onClick={this.handleMenu}
-                      >
-                        <MoreIcon color="action" />
-                      </Avatar>
-                    </div>
-                  ) : (
-                    <Avatar
-                      alt={user.username}
-                      src=""
-                      style={styles.avatar}
-                      onClick={this.handleMenu}
-                    >{nameInitials(user.username)}</Avatar>
-                  )}
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem onClick={this.handleProfile}>
-                    Sua conta
-                  </MenuItem>
-                  <MenuItem onClick={this.handleSignOut}>
-                    Sair
-                  </MenuItem>
-                </Menu>
-              </div>
+                <ReactPlaceholder showLoadingAnimation={true} customPlaceholder={ avatarPlaceholder } ready={ completed }>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={ { vertical: 'top', horizontal: 'right' } }
+                    transformOrigin={ { vertical: 'top', horizontal: 'right' } }
+                    open={open}
+                    onClose={this.handleClose}
+                  >
+                    <MenuItem onClick={this.handleProfile}>Sua conta</MenuItem>
+                    <MenuItem onClick={this.handleSignOut}>Sair</MenuItem>
+                  </Menu>
+                </ReactPlaceholder>
               }
-              </ReactPlaceholder>
-          </div>
-        </div>
-      </div>
+          </RightSide>
+        </Container>
+      </Bar>
     )
   }
 };
