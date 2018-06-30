@@ -14,8 +14,9 @@ import WorkIcon from 'material-ui-icons/Work';
 import AccountBalanceWalletIcon from 'material-ui-icons/AccountBalanceWallet';
 import Transition from '../transition';
 
-class Workflow extends Component {
+import { MainDivider, InfoList } from '../styles/style';
 
+class Workflow extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,10 +24,6 @@ class Workflow extends Component {
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
-  }
-
-  componentDidMount() {
-
   }
 
   handleClickOpen() {
@@ -38,7 +35,6 @@ class Workflow extends Component {
   };
 
   render() {
-
     const { classes } = this.props;
 
     return (
@@ -60,13 +56,13 @@ class Workflow extends Component {
               </Typography>
             </Toolbar>
             <div classeName={classes.spacedTop}>
-              <div className={classes.divider}>
+              <MainDivider>
                 <Typography variant="title" className={classes.appBarHeader} gutterBottom>
                   Fluxo de trabalho
                 </Typography>
-              </div>
+              </MainDivider>
             </div>
-            <div className={classes.infoList}>
+            <InfoList>
               <List>
                 <ListItem className={classes.listIconTop}>
                   <ListItemIcon>
@@ -96,7 +92,7 @@ class Workflow extends Component {
                                 secondary="Trabalhe em diferentes projetos e aprenda a criar soluções em times distribuídos por todo o mundo, usando as ferramentas que você já usa e propondo soluções para problemas que você conhece. Você também pode encarar novos desafios sem burocracia!"/>
                 </ListItem>
               </List>
-            </div>
+            </InfoList>
           </AppBar>
         </Dialog>
       </ListItem>

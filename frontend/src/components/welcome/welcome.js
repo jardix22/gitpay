@@ -10,7 +10,11 @@ import Avatar from 'material-ui/Avatar';
 import Notification from '../notification/notification';
 
 import formProps from '../form/form-props';
-import mainStyles from '../styles/style';
+import mainStyles, {
+  MainDivider,
+  MainList,
+  ResponsiveImage
+} from '../styles/style';
 
 import AccountBalanceWalletIcon from 'material-ui-icons/AccountBalanceWallet';
 import WorkIcon from 'material-ui-icons/Work';
@@ -80,12 +84,12 @@ class Welcome extends Component {
         <div className={classes.secBlock}>
           <Grid container spacing={24}>
             <Grid item xs={12} sm={6}>
-              <div className={classes.divider}>
+              <MainDivider left>
                 <Typography type="headline" gutterBottom>
                   Para freelancers
                 </Typography>
-              </div>
-              <div className={classes.mainlist}>
+              </MainDivider>
+              <MainList>
                 <List>
                   <ListItem className={classes.listIconTop}>
                     <ListItemIcon>
@@ -115,22 +119,22 @@ class Welcome extends Component {
                                   secondary="Receba o pagamento diretamente na sua conta pelas tarefas de desenvolvimento quando seu código for integrado"/>
                   </ListItem>
                 </List>
-              </div>
+              </MainList>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <img width="600" src={octodex}/>
+              <ResponsiveImage width="600" src={octodex}/>
             </Grid>
           </Grid>
         </div>
         <div className={classes.mainBlock}>
           <Grid container spacing={24}>
             <Grid item xs={12} sm={6}>
-              <div className={classes.divider}>
+              <MainDivider left>
                 <Typography type="headline" gutterBottom>
                   Para empresas
                 </Typography>
-              </div>
-              <div className={classes.mainlist}>
+              </MainDivider>
+              <MainList>
                 <List>
                   <ListItem className={classes.listIconTop}>
                     <ListItemIcon>
@@ -162,22 +166,20 @@ class Welcome extends Component {
                       secondary="Empresas podem nascer e se manter com o Gitpay, desde o design até o desenvolvimento, pagando apenas pelas demandas concluídas e integradas com o projeto"/>
                   </ListItem>
                 </List>
-              </div>
+              </MainList>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <img width="500" src={octodexMotherhubbertocat}/>
+              <ResponsiveImage width="500" src={octodexMotherhubbertocat}/>
             </Grid>
           </Grid>
         </div>
         <div className={classes.mainBlock}>
+          <MainDivider>
+            <Typography type="headline" gutterBottom>Como funciona</Typography>
+          </MainDivider>
           <Grid container spacing={24}>
-            <div className={classes.divider}>
-              <Typography type="headline" gutterBottom>
-                Como funciona
-              </Typography>
-            </div>
             <Grid item xs={12} sm={6}>
-              <img width="400" src={deal}/>
+              <ResponsiveImage width="400" src={deal}/>
             </Grid>
             <Grid item xs={12} sm={6}>
               <div className={classes.seclist}>

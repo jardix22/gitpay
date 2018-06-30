@@ -15,9 +15,9 @@ import WorkIcon from 'material-ui-icons/Work';
 import AccountBalanceWalletIcon from 'material-ui-icons/AccountBalanceWallet';
 import Transition from '../transition';
 
+import { MainDivider, InfoList } from '../styles/style'
 
 class WhoSubscribes extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -25,10 +25,6 @@ class WhoSubscribes extends Component {
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
-  }
-
-  componentDidMount() {
-
   }
 
   handleClickOpen() {
@@ -40,7 +36,6 @@ class WhoSubscribes extends Component {
   };
 
   render() {
-
     const {classes} = this.props;
 
     return (
@@ -62,13 +57,13 @@ class WhoSubscribes extends Component {
             </Typography>
           </Toolbar>
           <div classeName={classes.spacedTop}>
-            <div className={classes.divider}>
+            <MainDivider>
               <Typography variant="title" className={classes.appBarHeader} gutterBottom>
                 Quem pode se inscrever
               </Typography>
-            </div>
+            </MainDivider>
           </div>
-          <div className={classes.infoList}>
+          <InfoList>
             <List>
               <ListItem className={classes.listIconTop}>
                 <ListItemIcon>
@@ -98,7 +93,7 @@ class WhoSubscribes extends Component {
                               secondary="Trabalhe em diferentes projetos e aprenda a criar soluções em times distribuídos por todo o mundo, usando as ferramentas que você já usa e propondo soluções para problemas que você conhece. Você também pode encarar novos desafios sem burocracia!"/>
               </ListItem>
             </List>
-          </div>
+          </InfoList>
         </AppBar>
         </Dialog>
       </ListItem>

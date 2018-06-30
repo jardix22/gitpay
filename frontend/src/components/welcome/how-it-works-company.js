@@ -14,14 +14,12 @@ import WorkIcon from 'material-ui-icons/Work';
 import AccountBalanceWalletIcon from 'material-ui-icons/AccountBalanceWallet';
 import Transition from '../transition';
 
+import { MainDivider, InfoList } from '../styles/style';
 
 class HowItWorksCompany extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {
-      open: false
-    };
+    this.state = { open: false };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
@@ -39,7 +37,6 @@ class HowItWorksCompany extends Component {
   };
 
   render() {
-
     const {classes} = this.props;
 
     return (
@@ -61,13 +58,13 @@ class HowItWorksCompany extends Component {
                 </Typography>
               </Toolbar>
               <div classeName={classes.spacedTop}>
-                <div className={classes.divider}>
+                <MainDivider>
                   <Typography variant="title" className={classes.appBarHeader} gutterBottom>
                     Como funciona
                   </Typography>
-                </div>
+                </MainDivider>
               </div>
-              <div className={classes.infoList}>
+              <InfoList>
                 <List>
                   <ListItem className={classes.listIconTop}>
                     <ListItemIcon>
@@ -97,7 +94,7 @@ class HowItWorksCompany extends Component {
                                   secondary="A sua demanda é traduzida e dividida entre as diferentes competência para então ser atribuída aos freelancers que irão realizar a entrega de acordo com prazo e valores que podem ser definidos usando diferentes processos adaptados à realidade do seu projeto e tamanho da empresa"/>
                   </ListItem>
                 </List>
-              </div>
+              </InfoList>
             </AppBar>
         </Dialog>
       </ListItem>

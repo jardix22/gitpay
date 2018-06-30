@@ -13,6 +13,8 @@ import WorkIcon from 'material-ui-icons/Work';
 import AccountBalanceWalletIcon from 'material-ui-icons/AccountBalanceWallet';
 import Transition from '../transition';
 
+import { MainDivider, InfoList } from '../styles/style';
+
 
 class HowItWorksPeople extends Component {
 
@@ -60,13 +62,13 @@ class HowItWorksPeople extends Component {
                 </Typography>
               </Toolbar>
               <div classeName={classes.spacedTop}>
-                <div className={classes.divider}>
+                <MainDivider>
                   <Typography variant="title" className={classes.appBarHeader} gutterBottom>
                     Como funciona
                   </Typography>
-                </div>
+                </MainDivider>
               </div>
-              <div className={classes.infoList}>
+              <InfoList>
                 <List>
                   <ListItem className={classes.listIconTop}>
                     <ListItemIcon>
@@ -96,7 +98,7 @@ class HowItWorksPeople extends Component {
                                   secondary=" Sua mudança é enviada e avaliada em um ambiente de testes e mudanças podem ser discutidas e revisadas com os envolvidos no projeto. Assim que a mudança é integrada você recebe o pagamento"/>
                   </ListItem>
                 </List>
-              </div>
+              </InfoList>
             </AppBar>
         </Dialog>
       </ListItem>

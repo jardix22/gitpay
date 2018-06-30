@@ -13,6 +13,7 @@ import AppsIcon from 'material-ui-icons/Apps';
 import WorkIcon from 'material-ui-icons/Work';
 import AccountBalanceWalletIcon from 'material-ui-icons/AccountBalanceWallet';
 import Transition from '../transition';
+import { InfoList, MainDivider } from '../styles/style';
 
 
 class Consulting extends Component {
@@ -39,7 +40,6 @@ class Consulting extends Component {
   };
 
   render() {
-
     const {classes} = this.props;
 
     return (
@@ -61,13 +61,13 @@ class Consulting extends Component {
                 </Typography>
               </Toolbar>
               <div className={classes.spacedTop}>
-                <div className={classes.divider}>
+                <MainDivider>
                   <Typography variant="title" className={classes.appBarHeader} gutterBottom>
                     Consultoria
                   </Typography>
-                </div>
+                </MainDivider>
               </div>
-              <div className={classes.infoList}>
+              <InfoList>
                 <List>
                   <ListItem className={classes.listIconTop}>
                     <ListItemIcon>
@@ -97,7 +97,7 @@ class Consulting extends Component {
                                   secondary="Gerenciamos a infra estrutura em diversos serviços como Amazon, Heroku e Google Cloud"/>
                   </ListItem>
                 </List>
-              </div>
+              </InfoList>
             </AppBar>
         </Dialog>
       </ListItem>

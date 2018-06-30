@@ -6,6 +6,7 @@ import List from 'material-ui/List';
 import Button from 'material-ui/Button';
 import SubscribeFrom from 'react-mailchimp-subscribe';
 import Divider from 'material-ui/Divider';
+import styled from 'styled-components'
 
 import { withStyles } from 'material-ui/styles'
 
@@ -18,28 +19,42 @@ import Consulting from '../welcome/consulting';
 import formProps from '../form/form-props';
 
 import mainStyles from '../styles/style';
+import logoCompleteGray from '../../images/logo-complete-gray.png';
 
-const logoCompleteGray = require('../../images/logo-complete-gray.png');
+import { FooterContainer } from '../styles/style'
+import media from '../../styleguide/media'
 
 const styles = (theme) => mainStyles(theme);
 
-class Bottom extends Component {
+const SubscribeFromWrapper = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 
+  ${media.phone`
+    & input {
+      display: block;
+      margin: 0 auto 1rem auto;
+      width: 90%;
+      text-align: center;
+    }
+  `}
+`
+
+const BaseFooter = styled.div`
+  padding-top: 20px;
+`
+
+class Footer extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    //console.log(this.props.classes);
-  }
-
   render() {
-
     const { classes } = this.props;
 
     return (
       <div className={classes.secBlock}>
-        <div className={classes.alignLeftPadding}>
+        <FooterContainer>
           <Grid container spacing={24}>
             <Grid item xs={12} sm={3}>
               <Typography type="subheading">
@@ -71,9 +86,11 @@ class Bottom extends Component {
               <Typography type="subheading">
                 Tá na dúvida aí? Não se preocupe, deixe seu e-mail e fique sabendo de novos desafios!
               </Typography>
-              <div className="subscribe-form">
+
+              <SubscribeFromWrapper className="subscribe-form">
                 <SubscribeFrom  {...formProps} />
-              </div>
+              </SubscribeFromWrapper>
+
               <Typography type="caption">
                 <a href="http://worknenjoy.com">worknenjoy, Inc.</a> <br />
                 2035 Sunset Lake Road, Suite B-2 <br />
@@ -82,21 +99,17 @@ class Bottom extends Component {
             </Grid>
           </Grid>
           <Divider className={classes.spacedTop}/>
-          <Grid container spacing={24}>
-            <Grid item xs={12} sm={2}>
-              <div className={classes.logoSimple}>
-                <img className={classes.img} src={logoCompleteGray} width="100"/>
-              </div>
-            </Grid>
-          </Grid>
-        </div>
+          <BaseFooter>
+            <img className={classes.img} src={logoCompleteGray} width="100"/>
+          </BaseFooter>
+        </FooterContainer>
     </div>
     )
   }
 }
 
-Bottom.propTypes = {
+Footer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Bottom);
+export default withStyles(styles)(Footer);

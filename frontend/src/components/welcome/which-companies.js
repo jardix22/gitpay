@@ -14,6 +14,7 @@ import WorkIcon from 'material-ui-icons/Work';
 import AccountBalanceWalletIcon from 'material-ui-icons/AccountBalanceWallet';
 import Transition from '../transition';
 
+import { MainDivider, InfoList } from '../styles/style'
 
 class WhichCompanies extends Component {
 
@@ -24,10 +25,6 @@ class WhichCompanies extends Component {
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
-  }
-
-  componentDidMount() {
-
   }
 
   handleClickOpen() {
@@ -61,13 +58,13 @@ class WhichCompanies extends Component {
                 </Typography>
               </Toolbar>
               <div classeName={classes.spacedTop}>
-                <div className={classes.divider}>
+                <MainDivider>
                   <Typography variant="title" className={classes.appBarHeader} gutterBottom>
                     Para quais empresas?
                   </Typography>
-                </div>
+                </MainDivider>
               </div>
-              <div className={classes.infoList}>
+              <InfoList>
                 <List>
                   <ListItem className={classes.listIconTop}>
                     <ListItemIcon>
@@ -97,7 +94,7 @@ class WhichCompanies extends Component {
                                   secondary="Levantamos as demandas para preparar seu projeto para trabalhar com o desenvolvimento de forma independente"/>
                   </ListItem>
                 </List>
-              </div>
+              </InfoList>
             </AppBar>
         </Dialog>
       </ListItem>
